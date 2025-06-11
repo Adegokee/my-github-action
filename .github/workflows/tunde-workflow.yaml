@@ -1,0 +1,38 @@
+name: Manual Trigger Workflow au
+
+on:
+  
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person To Greet'
+        required: true
+        default: 'World'
+        type: string
+      city:
+        description: "Favorite City"
+        required: true
+        default: "Naski Nero"
+        type: choice
+        options:
+          - Nigeria
+          - Gernany
+          - Ghana
+          - Naski Nero
+      favorite_color:
+        description: "Is your favorite color blue"
+        required: true
+        type: boolean
+
+jobs:
+  greet:
+    name: "Greet Program"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Greetings
+        run: |
+          echo "Hello: ${{ github.event.inputs.name }}"
+          echo "Your Favourite color is: ${{ github.event.inputs.favorite_color }}"
+          echo "Your current City is: ${{ github.event.inputs.city }}"
+
